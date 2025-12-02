@@ -60,6 +60,7 @@
 }
 
 .wordFound {
+  @apply border-(--color-bg-modal-button-border,rgba(255,255,255,0.2)) border shadow-2xl;
   background: var(--color-bg-found);
   color: var(--color-text-found);
 }

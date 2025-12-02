@@ -43,6 +43,8 @@
 .timerDisplay {
   @apply flex items-baseline font-mono font-bold tracking-widest;
   @apply text-base md:text-xl lg:text-2xl text-(--color-text-timer,#fff);
+  transform: translateY(1px);
+  text-shadow: 0.5px 1px 1.5px rgba(0, 0, 0, 0.3);
 }
 
 .restartButton {
