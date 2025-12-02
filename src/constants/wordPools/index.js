@@ -7,3 +7,4 @@ export { officeWords } from "./office";
 export { natureWords } from "./nature";
 export { houseWords } from "./house";
 export { petsWords } from "./pets";
+export { xmasWords } from "./xmas";

@@ -20,6 +20,7 @@ const LEVEL_CONFIG = [
   { id: "nature", name: "Nature" },
   { id: "house", name: "Home" },
   { id: "pets", name: "Pets" },
+  { id: "xmas", name: "Christmas" },
 ];
 
 /**

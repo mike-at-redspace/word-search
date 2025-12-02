@@ -104,6 +104,21 @@
   @apply min-w-[150px] max-h-[200px];
   @apply border-white/20 bg-black/40;
   @apply shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,0,0,0.2)];
+
+  /* Scrollbar width */
+  @apply [&::-webkit-scrollbar]:w-2;
+
+  /* Track — rounded only top-right */
+  @apply [&::-webkit-scrollbar-track]:bg-black/40;
+  @apply [&::-webkit-scrollbar-track]:rounded-r-lg;
+
+  /* Thumb — no rounding to stay clipped */
+  @apply [&::-webkit-scrollbar-thumb]:bg-[var(--color-dropdown-active-indicator)];
+  @apply [&::-webkit-scrollbar-thumb]:rounded-r-lg;
+
+  /* Thumb hover */
+  @apply [&::-webkit-scrollbar-thumb:hover]:bg-[color:var(--color-dropdown-active-indicator)/0.6];
+
   --tw-backdrop-blur: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
