@@ -9,8 +9,8 @@ const GridCell = memo(
       isFound
         ? styles.cellFound
         : isSelected
-        ? styles.cellSelected
-        : styles.cellDefault,
+          ? styles.cellSelected
+          : styles.cellDefault,
     ].join(" ");
 
     return (

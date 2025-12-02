@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 import { getCellsInPath, buildFoundCellsMap } from "../helpers/gameLogic";
 
 /**
@@ -18,6 +18,27 @@ export const useWordSelection = (grid, words, foundWords, onWordFound) => {
     cells: [],
   });
 
+  // Track grid reference to detect changes
+  const gridRef = useRef(grid);
+
+  /**
+   * Check if grid has changed and reset selection if needed
+   * This avoids calling setState in an effect
+   */
+  const checkAndResetIfGridChanged = useCallback(() => {
+    if (gridRef.current !== grid) {
+      gridRef.current = grid;
+      setSelection({
+        active: false,
+        start: null,
+        current: null,
+        cells: [],
+      });
+      return true; // Grid changed
+    }
+    return false; // Grid unchanged
+  }, [grid]);
+
   /**
    * Reset selection state (used when switching levels/themes)
    */
@@ -33,80 +54,38 @@ export const useWordSelection = (grid, words, foundWords, onWordFound) => {
   /**
    * Handle the start of a selection (mouse down or touch start)
    */
-  const handleSelectionStart = useCallback((e, row, col) => {
-    if (e.type === "mousedown" || e.type === "touchstart") {
-      e.preventDefault();
-    }
+  const handleSelectionStart = useCallback(
+    (e, row, col) => {
+      if (e.type === "mousedown" || e.type === "touchstart") {
+        e.preventDefault();
+      }
 
-    const startNode = { row, col };
-    setSelection({
-      active: true,
-      start: startNode,
-      current: startNode,
-      cells: [startNode],
-    });
-  }, []);
+      // Reset selection if grid has changed
+      checkAndResetIfGridChanged();
+
+      const startNode = { row, col };
+      setSelection({
+        active: true,
+        start: startNode,
+        current: startNode,
+        cells: [startNode],
+      });
+    },
+    [checkAndResetIfGridChanged]
+  );
 
   /**
    * Handle hovering/entering a cell during selection
    */
-  const handleCellEnter = useCallback((row, col) => {
-    setSelection((prev) => {
-      if (!prev.active) return prev;
-
-      // Skip if we're already on this cell
-      if (prev.current && prev.current.row === row && prev.current.col === col)
-        return prev;
-
-      const current = { row, col };
-      const newCells = getCellsInPath(prev.start, current);
-
-      return {
-        ...prev,
-        current,
-        cells: newCells,
-      };
-    });
-  }, []);
-
-  /**
-   * Handle the end of a selection (mouse up or touch end)
-   */
-  const handleSelectionEnd = useCallback(() => {
-    setSelection((prev) => {
-      if (!prev.active) return prev;
-
-      // Build the selected word from cells
-      const word = prev.cells.map((c) => grid[c.row][c.col]).join("");
-      const reversedWord = word.split("").reverse().join("");
-
-      // Check if it matches any word we're looking for
-      const matchedWord = words.find((w) => w === word || w === reversedWord);
-
-      if (matchedWord && !foundWords.has(matchedWord)) {
-        onWordFound(matchedWord);
+  const handleCellEnter = useCallback(
+    (row, col) => {
+      // Reset selection if grid has changed
+      if (checkAndResetIfGridChanged()) {
+        return;
       }
 
-      // Clear selection
-      return { active: false, start: null, current: null, cells: [] };
-    });
-  }, [grid, words, foundWords, onWordFound]);
-
-  /**
-   * Handle touch move events for mobile
-   */
-  const handleTouchMove = useCallback((e) => {
-    e.preventDefault();
-
-    setSelection((prev) => {
-      if (!prev.active) return prev;
-
-      const touch = e.touches[0];
-      const target = document.elementFromPoint(touch.clientX, touch.clientY);
-
-      if (target && target.dataset.row) {
-        const row = parseInt(target.dataset.row);
-        const col = parseInt(target.dataset.col);
+      setSelection((prev) => {
+        if (!prev.active) return prev;
 
         // Skip if we're already on this cell
         if (
@@ -124,11 +103,84 @@ export const useWordSelection = (grid, words, foundWords, onWordFound) => {
           current,
           cells: newCells,
         };
+      });
+    },
+    [checkAndResetIfGridChanged]
+  );
+
+  /**
+   * Handle the end of a selection (mouse up or touch end)
+   */
+  const handleSelectionEnd = useCallback(() => {
+    // Reset selection if grid has changed
+    if (checkAndResetIfGridChanged()) {
+      return;
+    }
+
+    setSelection((prev) => {
+      if (!prev.active) return prev;
+
+      // Build the selected word from cells
+      const word = prev.cells.map((c) => grid[c.row][c.col]).join("");
+      const reversedWord = word.split("").reverse().join("");
+
+      // Check if it matches any word we're looking for
+      const matchedWord = words.find((w) => w === word || w === reversedWord);
+
+      if (matchedWord && !foundWords.has(matchedWord)) {
+        onWordFound(matchedWord);
       }
 
-      return prev;
+      // Clear selection
+      return { active: false, start: null, current: null, cells: [] };
     });
-  }, []);
+  }, [grid, words, foundWords, onWordFound, checkAndResetIfGridChanged]);
+
+  /**
+   * Handle touch move events for mobile
+   */
+  const handleTouchMove = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      // Reset selection if grid has changed
+      if (checkAndResetIfGridChanged()) {
+        return;
+      }
+
+      setSelection((prev) => {
+        if (!prev.active) return prev;
+
+        const touch = e.touches[0];
+        const target = document.elementFromPoint(touch.clientX, touch.clientY);
+
+        if (target && target.dataset.row) {
+          const row = parseInt(target.dataset.row);
+          const col = parseInt(target.dataset.col);
+
+          // Skip if we're already on this cell
+          if (
+            prev.current &&
+            prev.current.row === row &&
+            prev.current.col === col
+          )
+            return prev;
+
+          const current = { row, col };
+          const newCells = getCellsInPath(prev.start, current);
+
+          return {
+            ...prev,
+            current,
+            cells: newCells,
+          };
+        }
+
+        return prev;
+      });
+    },
+    [checkAndResetIfGridChanged]
+  );
 
   /**
    * Check if a specific cell is currently selected
@@ -145,11 +197,6 @@ export const useWordSelection = (grid, words, foundWords, onWordFound) => {
     () => buildFoundCellsMap(foundWords, grid),
     [foundWords, grid]
   );
-
-  // Reset selection when grid changes (level/theme switch)
-  useEffect(() => {
-    resetSelection();
-  }, [grid, resetSelection]);
 
   return {
     selection,

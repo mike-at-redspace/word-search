@@ -2,7 +2,7 @@ import { useState, useRef, useCallback } from "react";
 
 /**
  * Custom hook for managing game timer
- * 
+ *
  * @returns {Object} Timer state and controls
  * @returns {number} elapsedTime - Elapsed time in seconds
  * @returns {Function} startTimer - Start/restart the timer
@@ -23,7 +23,7 @@ export const useTimer = () => {
     // Reset elapsed time and start new timer
     setElapsedTime(0);
     const startTime = Date.now();
-    
+
     timerRef.current = setInterval(() => {
       setElapsedTime(Math.floor((Date.now() - startTime) / 1000));
     }, 1000);
@@ -48,4 +48,3 @@ export const useTimer = () => {
     seconds,
   };
 };
-

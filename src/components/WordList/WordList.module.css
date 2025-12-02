@@ -60,7 +60,8 @@
 }
 
 .wordFound {
-  @apply bg-(--color-bg-found) text-(--color-text-found);
+  background: var(--color-bg-found);
+  color: var(--color-text-found);
 }
 
 .indicator {
