@@ -69,4 +69,6 @@ export const officeTheme = {
   "--scrollbar-thumb": "color(display-p3 0.00 0.85 0.95 / 0.4)",
   "--scrollbar-thumb-hover": "color(display-p3 0.00 0.85 0.95 / 0.6)",
   "--scrollbar-thumb-active": "color(display-p3 0.00 0.85 0.95 / 0.8)",
+  // PWA theme color for title bar
+  themeColor: "#00d9f5",
 };

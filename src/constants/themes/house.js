@@ -69,4 +69,6 @@ export const houseTheme = {
   "--scrollbar-thumb": "color(display-p3 0.95 0.65 0.35 / 0.4)",
   "--scrollbar-thumb-hover": "color(display-p3 0.95 0.65 0.35 / 0.6)",
   "--scrollbar-thumb-active": "color(display-p3 0.95 0.65 0.35 / 0.8)",
+  // PWA theme color for title bar
+  themeColor: "#f2a55f",
 };

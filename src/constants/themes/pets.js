@@ -69,4 +69,6 @@ export const petsTheme = {
   "--scrollbar-thumb": "color(display-p3 0.85 0.55 0.90 / 0.4)",
   "--scrollbar-thumb-hover": "color(display-p3 0.85 0.55 0.90 / 0.6)",
   "--scrollbar-thumb-active": "color(display-p3 0.85 0.55 0.90 / 0.8)",
+  // PWA theme color for title bar
+  themeColor: "#d98ce5",
 };

@@ -69,4 +69,6 @@ export const techTheme = {
   "--scrollbar-thumb": "color(display-p3 0.13 0.83 0.91 / 0.4)",
   "--scrollbar-thumb-hover": "color(display-p3 0.13 0.83 0.91 / 0.6)",
   "--scrollbar-thumb-active": "color(display-p3 0.13 0.83 0.91 / 0.8)",
+  // PWA theme color for title bar
+  themeColor: "#21d4e8",
 };

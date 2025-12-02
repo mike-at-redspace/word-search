@@ -101,4 +101,6 @@ export const natureTheme = {
   "--scrollbar-thumb": "color(display-p3 0.36 0.72 0.40 / 0.4)",
   "--scrollbar-thumb-hover": "color(display-p3 0.36 0.72 0.40 / 0.6)",
   "--scrollbar-thumb-active": "color(display-p3 0.36 0.72 0.40 / 0.8)",
+  // PWA theme color for title bar
+  themeColor: "#52ab5a",
 };

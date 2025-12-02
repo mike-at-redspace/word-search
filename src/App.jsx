@@ -51,7 +51,10 @@ function App() {
 
     if (main && theme) {
       Object.entries(theme).forEach(([key, value]) => {
-        main.style.setProperty(key, value);
+        // Skip themeColor as it's not a CSS variable
+        if (key !== "themeColor") {
+          main.style.setProperty(key, value);
+        }
       });
 
       // Update html/body background to match theme (prevents white flash on desktop)
@@ -85,6 +88,17 @@ function App() {
           "--scrollbar-thumb-active",
           theme["--scrollbar-thumb-active"]
         );
+      }
+
+      // Update PWA theme-color meta tag dynamically
+      if (theme.themeColor) {
+        let themeColorMeta = document.querySelector('meta[name="theme-color"]');
+        if (!themeColorMeta) {
+          themeColorMeta = document.createElement("meta");
+          themeColorMeta.setAttribute("name", "theme-color");
+          document.head.appendChild(themeColorMeta);
+        }
+        themeColorMeta.setAttribute("content", theme.themeColor);
       }
     }
   }, [theme]);
