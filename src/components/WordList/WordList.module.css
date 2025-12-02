@@ -1,0 +1,126 @@
+@reference "../../index.css";
+
+.container {
+  @apply w-full lg:w-80 shrink-0 rounded-3xl p-3 md:p-4 lg:p-6 border shadow-xl relative;
+  @apply bg-(--color-bg-card);
+  @apply border-(--color-bg-card-border,rgba(255,255,255,0.12));
+  @apply shadow-(--color-shadow-card,0_2px_16px_rgba(0,0,0,0.08));
+}
+
+.container::before {
+  @apply absolute w-full h-full top-0 left-0 -z-10 pointer-events-none;
+  content: "";
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: inherit;
+}
+
+.header {
+  @apply flex items-center gap-3 mb-3 md:mb-4;
+}
+
+.titleWrapper {
+  @apply flex items-center gap-2 flex-nowrap;
+}
+
+.titleIcon {
+  @apply w-5 h-5 shrink-0 text-(--color-timer-icon,#67e8f9);
+}
+
+.title {
+  @apply text-xl font-bold tracking-wide whitespace-nowrap m-0 p-0;
+  @apply text-(--color-text-title,#fff);
+}
+
+.progressBar {
+  @apply h-1.5 flex-1 rounded-full overflow-hidden;
+  @apply bg-(--color-bg-progress-bar,rgba(0,0,0,0.3));
+}
+
+.progressFill {
+  @apply h-full transition-all duration-500;
+  @apply bg-(--color-bg-progress);
+}
+
+.wordGrid {
+  @apply max-h-[60vh] grid grid-cols-2 lg:grid-cols-1 gap-1.5 md:gap-2 overflow-y-auto pr-1 md:pr-2;
+  -webkit-overflow-scrolling: touch;
+}
+
+.wordItem {
+  @apply px-2 py-1 md:px-3 md:py-1.5 rounded-lg text-sm font-bold tracking-wider transition-all duration-300 flex items-center justify-between;
+}
+
+.wordDefault {
+  @apply bg-(--color-bg-word-default) text-(--color-text-word-default);
+}
+
+.wordDefault:hover {
+  @apply bg-(--color-bg-word-hover);
+}
+
+.wordFound {
+  @apply bg-(--color-bg-found) text-(--color-text-found);
+}
+
+.indicator {
+  @apply w-2 h-2 rounded-full;
+  @apply bg-(--color-wordlist-indicator,var(--color-bg-indicator));
+  @apply shadow-(--color-shadow-indicator,0_0_8px_rgba(34,211,238,0.8));
+}
+
+.themeSection {
+  @apply mt-3 pt-3 md:mt-4 md:pt-4 border-t relative;
+  @apply border-(--color-bg-card-border,rgba(255,255,255,0.12));
+}
+
+.themeName {
+  @apply text-center text-sm font-semibold tracking-wide opacity-70;
+  @apply text-(--color-text-word-default);
+}
+
+.levelSelector {
+  @apply relative mt-2 flex justify-center;
+}
+
+.levelButton {
+  @apply p-1.5 rounded-lg transition-all duration-200 flex items-center justify-center w-8 h-8 min-w-8 min-h-8 shrink-0 border;
+  @apply bg-(--color-bg-word-default) text-(--color-text-word-default);
+  @apply border-(--color-bg-card-border,rgba(255,255,255,0.12));
+}
+
+.levelButton:hover {
+  @apply scale-105 bg-(--color-bg-word-hover);
+}
+
+.levelButton:active {
+  @apply scale-95;
+}
+
+.levelDropdown {
+  @apply absolute bottom-full right-0 mb-2 rounded-lg z-10 border overflow-y-auto;
+  @apply min-w-[150px] max-h-[200px] isolate;
+  @apply border-white/20 bg-black/60 backdrop-blur-[16px];
+  @apply shadow-[0_8px_24px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,0,0,0.2)];
+  -webkit-backdrop-filter: blur(16px);
+  will-change: backdrop-filter;
+}
+
+.levelDropdown > * {
+  @apply relative z-[1];
+}
+
+.levelOption {
+  @apply w-full px-4 py-2 text-sm text-left transition-colors duration-200 bg-transparent border-0 cursor-pointer;
+  @apply text-(--color-text-main);
+}
+
+.levelOption:hover {
+  @apply bg-(--color-bg-word-hover) text-(--color-text-main);
+}
+
+.levelOptionActive {
+  @apply font-semibold bg-white/25;
+  @apply text-(--color-text-main);
+  @apply border-l-[3px] border-l-(--color-dropdown-active-indicator,#60a5fa);
+}

@@ -1,0 +1,69 @@
+@reference "../../index.css";
+
+.overlay {
+  @apply fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-md bg-(--color-bg-modal-overlay,rgba(0,0,0,0.35));
+}
+
+.modal {
+  @apply rounded-3xl p-8 max-w-md w-full text-center backdrop-blur-xl transition-all border;
+  @apply bg-(--color-bg-modal,rgba(0,0,0,0.3)) border-(--color-bg-modal-border,rgba(255,255,255,0.8));
+  @apply shadow-(--color-shadow-modal,0_8px_32px_rgba(0,0,0,0.25));
+}
+
+.iconWrapper {
+  @apply mx-auto w-20 h-20 backdrop-blur-sm rounded-full flex items-center justify-center mb-6 border;
+  @apply bg-(--color-bg-modal-icon,rgba(253,224,71,0.2)) border-(--color-bg-modal-icon-border,rgba(253,224,71,0.3));
+  @apply shadow-(--color-shadow-modal-icon,0_2px_8px_rgba(0,0,0,0.12));
+}
+
+.icon {
+  @apply w-10 h-10 text-(--color-text-modal-icon,#fde047);
+}
+
+.title {
+  @apply text-4xl font-black mb-2 tracking-tight;
+  background: var(
+    --color-gradient-main,
+    linear-gradient(90deg, #67e8f9, #a78bfa)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  @apply mb-6 text-lg text-(--color-text-modal-subtitle,#d1d5db);
+}
+
+.time {
+  @apply text-5xl font-mono font-bold mb-8;
+  background: var(
+    --color-gradient-main,
+    linear-gradient(90deg, #67e8f9, #a78bfa)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+.button {
+  @apply w-full py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center gap-2 backdrop-blur-sm transition-all active:scale-95 border;
+  @apply text-(--color-text-main) bg-(--color-bg-modal-button,#06b6d4) border-(--color-bg-modal-button-border,rgba(255,255,255,0.2));
+}
+.button:hover {
+  @apply bg-(--color-bg-modal-button-hover,#22d3ee);
+}
+
+.nextLevelButton {
+  @apply w-full py-4 px-6 rounded-xl font-bold text-lg flex items-center justify-center gap-2 backdrop-blur-sm transition-all active:scale-95 text-white border mt-3;
+  @apply bg-(--color-bg-modal-button,#a7f3d0) border-(--color-bg-modal-button-border,rgba(56,189,248,0.3));
+}
+.nextLevelButton:hover {
+  @apply bg-(--color-bg-modal-button-hover,#38bdf8);
+}
+
+.icon {
+  @apply w-5 h-5 text-white;
+}

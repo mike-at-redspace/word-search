@@ -1,0 +1,13 @@
+@reference "./index.css";
+
+.container {
+  @apply min-h-screen antialiased text-slate-200 font-sans;
+  @apply selection:bg-cyan-500/30 selection:text-white;
+  @apply overflow-hidden relative;
+}
+
+.content {
+  @apply relative z-10 container mx-auto px-4;
+  @apply flex flex-col items-center min-h-screen;
+  @apply py-4 md:py-8;
+}

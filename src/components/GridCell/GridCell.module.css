@@ -1,0 +1,42 @@
+@reference "../../index.css";
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.cell {
+  @apply relative flex items-center justify-center;
+  @apply text-lg sm:text-2xl font-bold rounded-lg;
+  @apply select-none transition-all duration-200 cursor-pointer;
+  @apply aspect-square;
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.cellDefault {
+  @apply bg-(--color-bg-cell-default,rgba(255,255,255,0.05)) text-(--color-text-main);
+}
+.cellDefault:hover {
+  @apply bg-(--color-bg-cell-hover,rgba(255,255,255,0.1));
+}
+
+.cellSelected {
+  @apply border-2 scale-110 z-20;
+  @apply bg-(--color-bg-cell-selected,rgba(34,211,238,0.5)) text-(--color-text-main);
+  @apply border-(--color-ring-found,#67e8f9);
+  box-shadow: var(
+    --color-shadow-cell-selected,
+    0 0 15px rgba(34, 211, 238, 0.5)
+  );
+  animation: pulse 1.5s infinite;
+}
+
+.cellFound {
+  @apply scale-105 z-10;
+  background: var(--color-bg-found);
+  color: var(--color-text-found);
+}

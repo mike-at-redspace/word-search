@@ -1,0 +1,5 @@
+@reference "../../index.css";
+
+.grid {
+  @apply grid grid-cols-10 gap-1.5 md:gap-2 h-full w-full;
+}

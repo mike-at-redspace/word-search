@@ -1,0 +1,114 @@
+@reference "../../index.css";
+
+@keyframes slideUpFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUpFromBottomDesktop {
+  0% {
+    transform: translate(-50%, calc(100% + 1rem));
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
+
+.installPrompt {
+  @apply fixed bottom-0 left-0 right-0 z-1000 p-4;
+  background: var(--color-bg-modal, rgba(0, 0, 0, 0.9));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid var(--color-bg-card-border, rgba(255, 255, 255, 0.1));
+  @apply shadow-[0_-4px_20px_rgba(0,0,0,0.3)];
+  animation: slideUpFromBottom 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@media (min-width: 641px) {
+  .installPrompt {
+    @apply bottom-4 left-1/2 right-auto max-w-[500px] rounded-2xl;
+    border-top: none;
+    border: 1px solid var(--color-bg-card-border, rgba(255, 255, 255, 0.1));
+    @apply shadow-[0_8px_32px_rgba(0,0,0,0.4)];
+    transform: translate(-50%, calc(100% + 1rem));
+    animation: slideUpFromBottomDesktop 0.4s cubic-bezier(0.16, 1, 0.3, 1)
+      forwards;
+  }
+
+  .installPrompt .content {
+    @apply max-w-none;
+  }
+}
+
+.content {
+  @apply flex items-center justify-between gap-4 max-w-[600px] mx-auto;
+}
+
+.text {
+  @apply flex flex-col gap-1 flex-1;
+}
+
+.text strong {
+  color: var(--color-text-main, #fff);
+  @apply text-base font-semibold;
+}
+
+.text span {
+  color: var(--color-text-modal-subtitle, rgba(255, 255, 255, 0.8));
+  @apply text-sm;
+}
+
+.buttons {
+  @apply flex items-center gap-2;
+}
+
+.installButton {
+  @apply px-5 py-2.5 rounded-lg font-semibold text-sm cursor-pointer transition-all duration-200 flex items-center gap-2;
+  @apply bg-(--color-bg-modal-button,#21d4e8);
+  @apply text-(--color-text-main,#fff);
+  @apply border-(--color-bg-modal-button-border,rgba(255,255,255,0.2)) border;
+}
+
+.installIcon {
+  @apply w-4 h-4 shrink-0;
+}
+
+.installButton:hover {
+  @apply bg-(--color-bg-modal-button-hover,#1bb8c8);
+  @apply -translate-y-px;
+}
+
+.installButton:active {
+  @apply translate-y-0;
+}
+
+.dismissButton {
+  @apply w-8 h-8 flex items-center justify-center bg-transparent border-0 rounded-full text-2xl leading-none cursor-pointer transition-colors duration-200;
+  @apply text-(--color-text-main,#fff);
+}
+
+.dismissButton:hover {
+  @apply bg-white/10;
+}
+
+@media (max-width: 640px) {
+  .content {
+    @apply flex-col items-stretch;
+  }
+
+  .buttons {
+    @apply w-full;
+  }
+
+  .installButton {
+    @apply flex-1;
+  }
+}

@@ -1,0 +1,13 @@
+@reference "../../index.css";
+
+.background {
+  @apply absolute inset-0 z-0 overflow-hidden pointer-events-none;
+}
+
+.bgGradientTop {
+  @apply absolute top-[-10%] left-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] bg-(--color-bg-gradient-top,rgba(34,211,238,0.3));
+}
+
+.bgGradientBottom {
+  @apply absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] rounded-full blur-[120px] bg-(--color-bg-gradient-bottom,rgba(236,72,153,0.3));
+}
