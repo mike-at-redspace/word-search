@@ -15,12 +15,12 @@ import * as wordPools from "./wordPools/index";
  * To remove a level: remove it from this array
  */
 const LEVEL_CONFIG = [
-  { id: "tech", name: "Tech" },
+  { id: "xmas", name: "Christmas" },
   { id: "office", name: "Office" },
+  { id: "tech", name: "Tech" },
   { id: "nature", name: "Nature" },
   { id: "house", name: "Home" },
   { id: "pets", name: "Pets" },
-  { id: "xmas", name: "Christmas" },
 ];
 
 /**
